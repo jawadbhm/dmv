@@ -130,15 +130,15 @@ const App: React.FC = () => {
       )}
 
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transform transition-transform duration-200 ease-in-out lg:relative lg:translate-x-0 ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="p-6 border-b border-slate-800">
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-slate-300 transform transition-transform duration-200 ease-in-out lg:relative lg:translate-x-0 flex flex-col ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+        <div className="p-6 border-b border-slate-800 shrink-0">
           <h1 className="text-xl font-bold text-white tracking-tight">
             CO <span className="text-indigo-500">DRIVER</span> PRO
           </h1>
           <p className="text-xs text-slate-500 mt-1">2023 Exhaustive Ed.</p>
         </div>
 
-        <nav className="flex-1 overflow-y-auto py-4">
+        <nav className="flex-1 overflow-y-auto py-4 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-900 hover:scrollbar-thumb-slate-600">
           <NavItem view={View.DASHBOARD} icon={LayoutDashboard} />
           
           <div className="px-4 py-2 mt-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Core Knowledge</div>
@@ -165,7 +165,7 @@ const App: React.FC = () => {
           <NavItem view={View.FINAL_EXAM} icon={GraduationCap} />
         </nav>
 
-        <div className="p-4 border-t border-slate-800">
+        <div className="p-4 border-t border-slate-800 shrink-0">
           <div className="flex items-center justify-between text-xs mb-2">
             <span>Course Progress</span>
             <span>{Math.round((progress.completedModules.length / 15) * 100)}%</span>
