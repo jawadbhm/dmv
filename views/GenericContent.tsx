@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { View } from '../types';
 import { moduleContent } from '../content';
-import { ChecklistBoard, ContentHeader, FlashcardGrid, KeyNumberStrip, Microcopy } from '../components/LearningCards';
+import { ChecklistBoard, ContentHeader, FlashcardGrid, GuideCardGrid, KeyNumberStrip, Microcopy } from '../components/LearningCards';
 
 interface Props {
   view: View;
@@ -32,6 +32,13 @@ const GenericContent: React.FC<Props> = ({ view, onComplete }) => {
         <section className="space-y-3">
           <p className="text-[11px] uppercase tracking-[0.14em] text-slate-500 font-semibold">Key numbers</p>
           <KeyNumberStrip items={content.keyNumbers} />
+        </section>
+      )}
+
+      {content.guideCards && content.guideCards.length > 0 && (
+        <section className="space-y-3">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-slate-500 font-semibold">Quick tips</p>
+          <GuideCardGrid items={content.guideCards} />
         </section>
       )}
 

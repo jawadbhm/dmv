@@ -1,5 +1,5 @@
 import { View } from './types';
-import { ChecklistItem, FlashcardItem, KeyNumberItem } from './components/LearningCards';
+import { ChecklistItem, FlashcardItem, GuideCardItem, KeyNumberItem } from './components/LearningCards';
 
 export interface ModuleContent {
   title: string;
@@ -8,6 +8,7 @@ export interface ModuleContent {
   keyNumbers?: KeyNumberItem[];
   checklists?: ChecklistItem[];
   quickNotes?: { label: string; body: string }[];
+  guideCards?: GuideCardItem[];
 }
 
 export const moduleContent: Record<View, ModuleContent> = {
@@ -44,6 +45,17 @@ export const moduleContent: Record<View, ModuleContent> = {
     checklists: [
       { label: 'Reinstatement Prep', items: ['Check eligibility date on DMV notice', 'Complete required alcohol/driver courses', 'File SR-22 if mandated', 'Pay reinstatement fee online or in-person'] },
       { label: 'Test Day Docs', items: ['Proof of ID and legal presence', 'Proof of address (two documents)', 'Social Security number proof', 'Insurance & registration for drive test vehicle'] },
+    ],
+    guideCards: [
+      {
+        title: 'Points That Spike Fast',
+        bullets: ['DUI/DWAI plus reckless: expect suspension and SR-22', '4 pts for texting when careless driving applies', 'Failure to yield or signal stacks with speeding']
+      },
+      {
+        title: 'Teen Restrictions Snapshot',
+        bullets: ['First 6 months: only one passenger (siblings exempt)', 'Curfew midnight–5am unless work/school/medical', 'No phone use under 18—hands-free still banned'],
+        tone: 'warning'
+      }
     ],
     quickNotes: [
       { label: 'DWAI vs DUI', body: 'DWAI starts at 0.05% BAC; DUI at 0.08%. Refusal equals automatic license revocation via Express Consent.' },
@@ -84,6 +96,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Emergency Kit', items: ['Spare tire + jack', 'Jumper cables or pack', 'Reflective triangle/flares', 'Phone charger + first aid kit'] },
       { label: 'Paperwork', items: ['Registration & insurance accessible', 'Emission/inspection proof if required', 'Title stored safely—not in car'] },
     ],
+    guideCards: [
+      {
+        title: 'Visibility & Legibility',
+        bullets: ['Keep plates clean and fully visible—no covers over letters', 'Tint above AS-1 line only; 27% VLT on front sides', 'Replace cracked lights/lenses that change color']
+      },
+      {
+        title: 'Equipment Pitfalls',
+        bullets: ['Muffler delete or straight pipe invites tickets', 'Loads must be secured and covered to prevent spills', 'Snow/ice on roof can be cited if it flies off'],
+        tone: 'warning'
+      }
+    ],
     quickNotes: [
       { label: 'Liability Basics', body: 'Colorado minimums: $25k bodily injury per person / $50k per crash / $15k property damage. Higher coverage is safer.' },
     ],
@@ -121,6 +144,16 @@ export const moduleContent: Record<View, ModuleContent> = {
     checklists: [
       { label: 'Before Moving', items: ['Seat, mirrors, headrest set', 'Doors locked, seat belt on', 'Foot on brake before shifting', 'Scan 360° for hazards'] },
       { label: 'After Parking', items: ['Set parking brake', 'Turn wheels toward/away from curb as required', 'Remove keys and valuables', 'Lock vehicle'] },
+    ],
+    guideCards: [
+      {
+        title: 'Body Position',
+        bullets: ['Sit high enough to see hood edges', 'Wrists on top of wheel = correct distance', 'Head restraint even with top of ears']
+      },
+      {
+        title: 'Smoothness Formula',
+        bullets: ['Press pedals like dimmers, not switches', 'Look far ahead to avoid sudden steering', 'Make one change at a time—speed, then lane']
+      }
     ],
     quickNotes: [
       { label: 'Eyes Up', body: 'Aim your vision 12–15 seconds ahead to avoid tunnel vision and smooth out your steering inputs.' },
@@ -160,6 +193,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Protected Left Turn', items: ['Signal early', 'Enter turn lane near center line', 'Yield to pedestrians on green arrow end', 'Keep wheels straight until turn'] },
       { label: 'Uncontrolled Intersection', items: ['Slow and cover brake', 'Yield to vehicles on right', 'Yield to pedestrians always', 'Communicate with eye contact/gestures'] },
     ],
+    guideCards: [
+      {
+        title: 'Signal Priorities',
+        bullets: ['Green arrows override circular signals for that lane', 'Flashing yellow arrow = yield, then turn when clear', 'Dark signals act as all-way stop signs']
+      },
+      {
+        title: 'Marking Meanings',
+        bullets: ['Solid white: stay put; broken white: lane changes allowed', 'Double solid yellow: no passing; broken + solid: pass only on broken side', 'Bike boxes and crosswalks must stay clear on red'],
+        tone: 'warning'
+      }
+    ],
     quickNotes: [
       { label: 'Walk vs. Flashing Hand', body: 'Solid WALK means enter; flashing hand means finish crossing—never start driving until the crosswalk is clear.' },
     ],
@@ -197,6 +241,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'School Bus Stop', items: ['Red lights & stop arm = stop both directions (unless divided by median)', 'Stay stopped until lights stop flashing', 'Watch for children near roadway'] },
       { label: 'Lane Discipline', items: ['Keep right except to pass', 'Use center turn lane only to turn left', 'Signal every lane change', 'Check mirrors + blind spot before moving'] },
     ],
+    guideCards: [
+      {
+        title: 'Yield Hierarchy',
+        bullets: ['Pedestrians and cyclists first at crossings', 'Uphill traffic keeps priority on narrow grades', 'Emergency vehicles with lights/siren override all']
+      },
+      {
+        title: 'Speed Context',
+        bullets: ['Work zones = reduced speeds + doubled fines', 'School zones drop to posted limits when active', 'Slow for sight limits: hills, curves, parked cars'],
+        tone: 'warning'
+      }
+    ],
     quickNotes: [
       { label: 'Work Zones', body: 'Orange signs = automatic speed and fine changes. Plan for flaggers, lane shifts, and workers on foot.' },
     ],
@@ -233,6 +288,17 @@ export const moduleContent: Record<View, ModuleContent> = {
     checklists: [
       { label: 'Lane Change', items: ['Mirror-signal-head check', 'Glide—not jerk—into lane', 'Cancel signal after move', 'Reassess following gap'] },
       { label: 'Hill Parking', items: ['Uphill with curb: wheels left', 'Downhill with curb: wheels right', 'No curb: wheels toward shoulder', 'Set parking brake before leaving'] },
+    ],
+    guideCards: [
+      {
+        title: 'Merging Mindset',
+        bullets: ['Use full acceleration lane to match speed', 'Form zipper merges when lanes drop', 'If a gap disappears, aim behind the next vehicle—not beside a truck']
+      },
+      {
+        title: 'Exit Cleanly',
+        bullets: ['Signal 300+ ft before exit', 'Move into exit lane early—never cut the gore', 'Missed your exit? Continue and loop back safely'],
+        tone: 'warning'
+      }
     ],
     quickNotes: [
       { label: 'Ramp Etiquette', body: 'Use the whole acceleration lane; look for a zipper pattern where lanes drop to avoid last-second swerves.' },
@@ -272,6 +338,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Railroad Crossings', items: ['Stop 15-50 ft when lights flash/gates down', 'Never go around lowered gates', 'Check for second train before crossing'] },
       { label: 'Neighborhood Driving', items: ['Cover brake near parks/schools', 'Expect kids between parked cars', 'Obey 20 mph school zone limits', 'Watch for pets and cyclists'] },
     ],
+    guideCards: [
+      {
+        title: 'Bike & Ped Priority',
+        bullets: ['Crosswalk users always win conflicts', '3-foot minimum when passing bikes—give more at speed', 'Green bike boxes are off-limits for stopped cars']
+      },
+      {
+        title: 'Big Vehicle Buffer',
+        bullets: ['Stay out of truck “No-Zones”: front, right side, rear', 'Expect wide right turns—give buses/trucks swing room', 'Don’t cut back in until you see full grille in mirror'],
+        tone: 'warning'
+      }
+    ],
     quickNotes: [
       { label: 'Move Over Law', body: 'When approaching stopped emergency/maintenance vehicles, move over one lane or slow to a safe speed below posted.' },
       { label: 'Ped Priority', body: 'Treat every crosswalk like a zone of respect—Colorado expects yielding even at unmarked intersections.' },
@@ -310,6 +387,17 @@ export const moduleContent: Record<View, ModuleContent> = {
     checklists: [
       { label: 'Night Driving', items: ['Dim high beams within 500 ft oncoming / 200 ft following', 'Watch for pedestrians in dark clothing', 'Increase following distance', 'Slow for animals near road'] },
       { label: 'Aggression Diffuser', items: ['Do not make eye contact', 'Let them pass; move right', 'Call 911 if threatened and safe to do so', 'Stop in public, well-lit place if needed'] },
+    ],
+    guideCards: [
+      {
+        title: 'Attention Anchors',
+        bullets: ['Eyes move every 2 seconds: mirrors, far road, near road', 'Narrate risks aloud to stay mentally engaged', 'Hands stay at 9&3 to protect against airbag injuries']
+      },
+      {
+        title: 'Distraction Filters',
+        bullets: ['Set nav and climate before moving', 'Silence notifications or use focus modes', 'If emotions spike, pull over—never drive angry'],
+        tone: 'warning'
+      }
     ],
     quickNotes: [
       { label: 'Fatigue Facts', body: 'Rolling down windows is not a strategy. Swap drivers, pull into a rest area, or nap safely before continuing.' },
@@ -352,6 +440,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Traction Gear', items: ['Chains/AutoSock (fits your tires)', 'Collapsible shovel + sand/kitty litter', 'Gloves and mat for chain installs'] },
       { label: 'Visibility Kit', items: ['Ice scraper & brush', 'High-vis triangle or flares', 'Phone charger + flashlight'] },
     ],
+    guideCards: [
+      {
+        title: 'Before the Pass',
+        bullets: ['Check CDOT alerts for Code 15/16', 'Test AWD/4WD engagement before traffic', 'Turn off cruise control on slick grades']
+      },
+      {
+        title: 'During Descent',
+        bullets: ['Downshift early and hold a steady speed', 'Tap brakes briefly to manage heat', 'Use pull-outs to cool brakes if you smell overheating'],
+        tone: 'warning'
+      }
+    ],
     quickNotes: [
       { label: 'Traction Codes', body: 'Active Sept–May: Code 15 requires AWD/4WD with 3/16" tread OR chains/AutoSock. Code 16 (Chain Law) requires chains for ALL vehicles.' },
       { label: 'Cold Weather Technique', body: 'Plan your exit before braking. Whiteouts, black ice, and steep drop-offs mean vision-first driving: slow earlier, signal earlier, and avoid sudden steering.' },
@@ -390,6 +489,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Low-Visibility Prep', items: ['Clean windshield inside/out', 'Use defroster early to prevent fogging', 'Check wipers + washer fluid', 'Turn on headlights, not parking lights only'] },
       { label: 'Post-Storm Check', items: ['Brake lightly after puddles to dry rotors', 'Clear mud/snow from wheel wells', 'Inspect tires for embedded debris'] },
     ],
+    guideCards: [
+      {
+        title: 'Wet-Weather Tactics',
+        bullets: ['Turn on headlights with wipers—always', 'Cancel cruise control in rain, snow, or ice', 'If visibility drops, slow first, then adjust lane position']
+      },
+      {
+        title: 'Fog & Smoke Discipline',
+        bullets: ['Low beams only; high beams bounce back', 'If you must stop, pull far off and use hazards', 'Follow right edge lines to stay oriented without tailgating'],
+        tone: 'warning'
+      }
+    ],
   },
   [View.EMERGENCIES]: {
     title: 'Emergencies',
@@ -424,6 +534,17 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Crash Scene', items: ['Stop and secure scene', 'Call 911 for injuries', 'Move vehicles out of travel lane if minor', 'Exchange info + document photos'] },
       { label: 'Roadside Safety', items: ['Use hazards immediately', 'Place triangles/flares if safe', 'Stay behind barrier away from traffic', 'Wait for tow on shoulder, not in car if risky'] },
     ],
+    guideCards: [
+      {
+        title: 'If the Car Fails',
+        bullets: ['Signal early and glide to shoulder', 'Keep steering gentle—no sudden moves on flats or blowouts', 'Stay buckled until safely out of travel lanes']
+      },
+      {
+        title: 'If You Crash',
+        bullets: ['Check for injuries first; call 911 when needed', 'Move cars off travel lane when minor and safe', 'Use hazards/triangles; stay behind guardrail if traffic is fast'],
+        tone: 'warning'
+      }
+    ],
   },
   [View.ROAD_TEST]: {
     title: 'Road Test Prep',
@@ -457,6 +578,17 @@ export const moduleContent: Record<View, ModuleContent> = {
     checklists: [
       { label: 'Car Readiness', items: ['Windshield clear of cracks blocking view', 'Working brake lights/signals', 'Valid temp/perm plates', 'No warning alarms active'] },
       { label: 'Mindset', items: ['Breathe—drive like practice', 'If unsure, ask to repeat instructions', 'Correct mistakes safely; don’t panic', 'Eyes high, hands steady'] },
+    ],
+    guideCards: [
+      {
+        title: 'Exam Strategy',
+        bullets: ['Narrate mirror checks to show awareness', 'Look far ahead—avoid staring at hood', 'If you miss a turn, continue; never slam brakes to correct']
+      },
+      {
+        title: 'Parallel Parking Cues',
+        bullets: ['Start 3–4 ft from car ahead', 'Turn wheel sharply at rear-bumper alignment, then straighten', 'Finish within **18 inches** of curb and set brake'],
+        tone: 'success'
+      }
     ],
   },
 };
