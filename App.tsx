@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, ProgressState } from './types';
-import { 
-  LayoutDashboard, 
-  BookOpen, 
-  Car, 
-  Signpost, 
-  AlertTriangle, 
-  Users, 
-  ShieldCheck, 
-  Images, 
-  FlaskConical, 
-  Mountain, 
-  CloudRain, 
-  Siren, 
-  ClipboardCheck, 
+import {
+  LayoutDashboard,
+  BookOpen,
+  Car,
+  Signpost,
+  AlertTriangle,
+  Users,
+  ShieldCheck,
+  Images,
+  FlaskConical,
+  Mountain,
+  CloudRain,
+  Siren,
+  ClipboardCheck,
   GraduationCap,
   Menu,
   X,
@@ -23,66 +23,70 @@ import {
 
 // Views
 import Dashboard from './views/Dashboard';
-import LicensePenalties from './views/LicensePenalties';
 import SignsGallery from './views/SignsGallery';
 import InteractiveLabs from './views/InteractiveLabs';
 import FinalExam from './views/FinalExam';
 import GenericContent from './views/GenericContent';
-import VehicleOwner from './views/VehicleOwner';
-import RulesOfRoad from './views/RulesOfRoad';
-import HighwaysManeuvers from './views/HighwaysManeuvers';
-import SharingTheRoad from './views/SharingTheRoad';
-import DriverSafety from './views/DriverSafety';
-import WeatherConditions from './views/WeatherConditions';
-import RoadTestPrep from './views/RoadTestPrep';
-import Emergencies from './views/Emergencies';
-import BasicDriving from './views/BasicDriving';
-import TrafficControls from './views/TrafficControls';
 import MountainWinter from './views/MountainWinter';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.DASHBOARD);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const completableModules: View[] = [
+    View.LICENSE,
+    View.VEHICLE,
+    View.BASIC,
+    View.CONTROLS,
+    View.RULES,
+    View.HIGHWAYS,
+    View.SHARING,
+    View.SAFETY,
+    View.SIGNS,
+    View.LABS,
+    View.MOUNTAIN,
+    View.WEATHER,
+    View.EMERGENCIES,
+    View.ROAD_TEST,
+    View.FINAL_EXAM
+  ];
+
   const [progress, setProgress] = useState<ProgressState>({
     completedModules: [],
     examHighScore: 0
   });
 
-  const markComplete = (module: string) => {
-    if (!progress.completedModules.includes(module)) {
-      setProgress(prev => ({
-        ...prev,
-        completedModules: [...prev.completedModules, module]
-      }));
-    }
-  };
+  const markComplete = useCallback((module: View) => {
+    setProgress(prev =>
+      prev.completedModules.includes(module)
+        ? prev
+        : { ...prev, completedModules: [...prev.completedModules, module] }
+    );
+  }, []);
 
-  const updateScore = (score: number) => {
-    if (score > progress.examHighScore) {
-      setProgress(prev => ({ ...prev, examHighScore: score }));
-    }
-  };
+  const updateScore = useCallback((score: number) => {
+    setProgress(prev => (score > prev.examHighScore ? { ...prev, examHighScore: score } : prev));
+  }, []);
 
   const renderView = () => {
     switch (currentView) {
       case View.DASHBOARD:
         return <Dashboard progress={progress} setView={setCurrentView} />;
       case View.LICENSE:
-        return <LicensePenalties onComplete={() => markComplete(View.LICENSE)} />;
+        return <GenericContent view={View.LICENSE} onComplete={() => markComplete(View.LICENSE)} />;
       case View.VEHICLE:
-        return <VehicleOwner onComplete={() => markComplete(View.VEHICLE)} />;
+        return <GenericContent view={View.VEHICLE} onComplete={() => markComplete(View.VEHICLE)} />;
       case View.BASIC:
-        return <BasicDriving onComplete={() => markComplete(View.BASIC)} />;
+        return <GenericContent view={View.BASIC} onComplete={() => markComplete(View.BASIC)} />;
       case View.CONTROLS:
-        return <TrafficControls onComplete={() => markComplete(View.CONTROLS)} />;
+        return <GenericContent view={View.CONTROLS} onComplete={() => markComplete(View.CONTROLS)} />;
       case View.RULES:
-        return <RulesOfRoad onComplete={() => markComplete(View.RULES)} />;
+        return <GenericContent view={View.RULES} onComplete={() => markComplete(View.RULES)} />;
       case View.HIGHWAYS:
-        return <HighwaysManeuvers onComplete={() => markComplete(View.HIGHWAYS)} />;
+        return <GenericContent view={View.HIGHWAYS} onComplete={() => markComplete(View.HIGHWAYS)} />;
       case View.SHARING:
-        return <SharingTheRoad onComplete={() => markComplete(View.SHARING)} />;
+        return <GenericContent view={View.SHARING} onComplete={() => markComplete(View.SHARING)} />;
       case View.SAFETY:
-        return <DriverSafety onComplete={() => markComplete(View.SAFETY)} />;
+        return <GenericContent view={View.SAFETY} onComplete={() => markComplete(View.SAFETY)} />;
       case View.SIGNS:
         return <SignsGallery onComplete={() => markComplete(View.SIGNS)} />;
       case View.LABS:
@@ -90,13 +94,13 @@ const App: React.FC = () => {
       case View.MOUNTAIN:
         return <MountainWinter onComplete={() => markComplete(View.MOUNTAIN)} />;
       case View.WEATHER:
-        return <WeatherConditions onComplete={() => markComplete(View.WEATHER)} />;
+        return <GenericContent view={View.WEATHER} onComplete={() => markComplete(View.WEATHER)} />;
       case View.EMERGENCIES:
-        return <Emergencies onComplete={() => markComplete(View.EMERGENCIES)} />;
+        return <GenericContent view={View.EMERGENCIES} onComplete={() => markComplete(View.EMERGENCIES)} />;
       case View.ROAD_TEST:
-        return <RoadTestPrep onComplete={() => markComplete(View.ROAD_TEST)} />;
+        return <GenericContent view={View.ROAD_TEST} onComplete={() => markComplete(View.ROAD_TEST)} />;
       case View.FINAL_EXAM:
-        return <FinalExam updateScore={updateScore} />;
+        return <FinalExam updateScore={updateScore} onComplete={() => markComplete(View.FINAL_EXAM)} />;
       default:
         return <GenericContent view={currentView} onComplete={() => markComplete(currentView)} />;
     }
@@ -168,12 +172,12 @@ const App: React.FC = () => {
         <div className="p-4 border-t border-slate-800 shrink-0">
           <div className="flex items-center justify-between text-xs mb-2">
             <span>Course Progress</span>
-            <span>{Math.round((progress.completedModules.length / 15) * 100)}%</span>
+            <span>{Math.round((progress.completedModules.length / completableModules.length) * 100)}%</span>
           </div>
           <div className="w-full bg-slate-800 rounded-full h-1.5">
-            <div 
-              className="bg-indigo-500 h-1.5 rounded-full transition-all duration-500" 
-              style={{ width: `${(progress.completedModules.length / 15) * 100}%` }}
+            <div
+              className="bg-indigo-500 h-1.5 rounded-full transition-all duration-500"
+              style={{ width: `${(progress.completedModules.length / completableModules.length) * 100}%` }}
             ></div>
           </div>
         </div>
