@@ -7,7 +7,11 @@ export interface FlashcardItem {
   dos: string[];
   donts: string[];
   quickTip?: string;
-  visual?: string;
+  visual?: React.ReactNode;
+  visualLabel?: string;
+  visualStat?: string;
+  visualDescriptor?: string;
+  visualTone?: 'indigo' | 'emerald' | 'amber' | 'rose';
 }
 
 export interface KeyNumberItem {
@@ -47,23 +51,48 @@ export const FlashcardGrid: React.FC<{ items: FlashcardItem[] }> = ({ items }) =
 
 const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const tone = card.visualTone ?? 'indigo';
+
+  const toneBg: Record<NonNullable<FlashcardItem['visualTone']>, string> = {
+    indigo: 'bg-gradient-to-br from-indigo-50 via-white to-slate-50 border-indigo-100 text-indigo-700',
+    emerald: 'bg-gradient-to-br from-emerald-50 via-white to-slate-50 border-emerald-100 text-emerald-700',
+    amber: 'bg-gradient-to-br from-amber-50 via-white to-slate-50 border-amber-100 text-amber-700',
+    rose: 'bg-gradient-to-br from-rose-50 via-white to-slate-50 border-rose-100 text-rose-700'
+  };
+
+  const toneDot: Record<NonNullable<FlashcardItem['visualTone']>, string> = {
+    indigo: 'bg-indigo-500',
+    emerald: 'bg-emerald-500',
+    amber: 'bg-amber-500',
+    rose: 'bg-rose-500'
+  };
 
   return (
-    <article
-      className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all p-4 flex flex-col space-y-3"
-    >
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-[11px] font-semibold text-indigo-500">Flashcard</p>
+    <article className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all p-4 flex flex-col space-y-4">
+      <div className="flex items-start justify-between space-x-3">
+        <div className="space-y-1">
+          <p className="text-[11px] font-semibold text-indigo-500 uppercase tracking-[0.12em]">Flashcard</p>
           <h3 className="text-lg font-bold text-slate-900 leading-snug">{card.title}</h3>
+          <p className="text-sm text-slate-600 leading-relaxed">{card.summary}</p>
         </div>
-        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-50 via-white to-slate-50 border border-slate-100 flex items-center justify-center text-indigo-500 text-xl font-bold">
-          <span aria-hidden="true">{card.visual ?? <Sparkles size={18} />}</span>
+        <div className={`w-32 shrink-0 rounded-2xl border p-3 text-left shadow-inner ${toneBg[tone]}`}>
+          <div className="flex items-center justify-between text-xs font-semibold">
+            <span className="uppercase tracking-[0.1em] text-[10px] opacity-80">{card.visualLabel ?? 'Visual cue'}</span>
+            <span aria-hidden="true" className="text-base">
+              {card.visual ?? <Sparkles size={16} />}
+            </span>
+          </div>
           {typeof card.visual === 'string' && <span className="sr-only">{card.title} visual</span>}
+          <p className="text-2xl font-black mt-2 leading-none">{card.visualStat ?? 'Ready'}</p>
+          {card.visualDescriptor && (
+            <p className="text-[12px] mt-1 leading-snug opacity-90">{card.visualDescriptor}</p>
+          )}
+          <div className="mt-2 flex items-center space-x-2 text-[11px] font-semibold">
+            <span className={`inline-block w-2 h-2 rounded-full ${toneDot[tone]}`} />
+            <span className="tracking-tight">Tap to reveal actions</span>
+          </div>
         </div>
       </div>
-
-      <p className="text-sm text-slate-600 flex-1 leading-relaxed">{card.summary}</p>
 
       <button
         type="button"
