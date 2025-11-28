@@ -1,6 +1,25 @@
 import React, { useState, useRef } from 'react';
 import { SimulationCanvas } from '../components/SimulationCanvas';
+import { GuideCardGrid } from '../components/LearningCards';
 import { RefreshCw, Car, ArrowUp, ArrowDown, Timer, Zap, MousePointer2 } from 'lucide-react';
+
+const LAB_GUIDES = [
+  {
+    title: 'Do the Right Thing First',
+    bullets: ['Right-of-way drills mimic real test items', 'Order matters—click cars in sequence', 'Look for pedestrian/flagger cues before moving'],
+    tone: 'info' as const
+  },
+  {
+    title: 'Spacing + Traction',
+    bullets: ['3 sec dry, 4 sec wet, 6 sec snow minimum', 'Gaps shrink in labs when you drag the slider', 'Watch status colors: mint = safe, rose = too close'],
+    tone: 'success' as const
+  },
+  {
+    title: 'Parking & Reaction',
+    bullets: ['Uphill + curb = wheels left; all else right', 'Reset and retry angles until muscle memory sticks', 'Aim for <300 ms reaction in the light test—practice makes habit'],
+    tone: 'warning' as const
+  }
+];
 
 const InteractiveLabs: React.FC<{onComplete: () => void}> = ({ onComplete }) => {
   // Lab 1 State: 4-Way Stop
@@ -110,10 +129,16 @@ const InteractiveLabs: React.FC<{onComplete: () => void}> = ({ onComplete }) => 
 
   return (
     <div className="space-y-8 pb-20">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-bold text-slate-800">Interactive Labs</h2>
-        <span className="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">5 Modules Available</span>
+      <div className="bg-slate-900 text-white rounded-3xl p-6 flex flex-col md:flex-row md:items-center md:justify-between shadow-lg">
+        <div className="space-y-1">
+          <p className="text-[11px] uppercase tracking-[0.14em] text-indigo-200 font-semibold">Interactive Labs</p>
+          <h2 className="text-2xl font-bold leading-tight">Hands-on drills that match DMV scenarios</h2>
+          <p className="text-sm text-indigo-100 max-w-2xl">Short tasks, instant feedback, and safety colors keep each skill bite-sized.</p>
+        </div>
+        <span className="px-3 py-1.5 bg-white/10 text-indigo-50 text-xs font-bold rounded-full border border-white/15">5 Modules Available</span>
       </div>
+
+      <GuideCardGrid items={LAB_GUIDES} />
 
       <div className="grid lg:grid-cols-2 gap-8">
         {/* Lab 1: Right of Way */}

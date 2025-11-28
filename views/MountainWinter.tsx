@@ -1,3 +1,6 @@
+import React from 'react';
+import { View } from '../types';
+import GenericContent from './GenericContent';
 import React, { useEffect } from 'react';
 import { Mountain, Snowflake } from 'lucide-react';
 import {
@@ -9,11 +12,15 @@ import {
 } from '../components/LearningCards';
 import { keyNumbers, mountainFlashcards, quickMicrocopy, winterChecklist } from '../content';
 
-const MountainWinter: React.FC<{onComplete: () => void}> = ({ onComplete }) => {
-  useEffect(() => {
-    onComplete();
-  }, [onComplete]);
+interface Props {
+  onComplete: () => void;
+}
 
+const MountainWinter: React.FC<Props> = React.memo(({ onComplete }) => {
+  return <GenericContent view={View.MOUNTAIN} onComplete={onComplete} />;
+});
+
+MountainWinter.displayName = 'MountainWinter';
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="flex items-center space-x-3">
