@@ -38,8 +38,8 @@ export const moduleContent: Record<View, ModuleContent> = {
       {
         title: 'Permit to License',
         summary: 'Graduated licensing steps for teens—each stage has a minimum duration.',
-        dos: ['Hold permit 12 months', 'Log 50 hours (10 at night) with supervisor', 'Drive with one passenger for first 6 months after license'],
-        donts: ['Drive past curfew (midnight–5am) without exemptions', 'Use phone while driving (ban under 18)', 'Forget vision and written test IDs'],
+        dos: ['Hold permit 12 months', 'Log 50 hours (10 at night) with supervisor', 'No passengers under 21 for first 6 months unless sibling/medical/instructor'],
+        donts: ['Carry friends under 21 in first 6 months (siblings excepted)', 'Drive past curfew (midnight–5am) without exemptions', 'Use phone while driving (ban under 18)'],
       },
     ],
     checklists: [
@@ -51,15 +51,16 @@ export const moduleContent: Record<View, ModuleContent> = {
         title: 'Points That Spike Fast',
         bullets: ['DUI/DWAI plus reckless: expect suspension and SR-22', '4 pts for texting when careless driving applies', 'Failure to yield or signal stacks with speeding']
       },
-      {
-        title: 'Teen Restrictions Snapshot',
-        bullets: ['First 6 months: only one passenger (siblings exempt)', 'Curfew midnight–5am unless work/school/medical', 'No phone use under 18—hands-free still banned'],
-        tone: 'warning'
-      }
+        {
+          title: 'Teen Restrictions Snapshot',
+          bullets: ['First 6 months: no passengers under 21 (siblings/medical/emergency exceptions)', 'Months 7–12: one passenger under 21 allowed unless siblings', 'Curfew midnight–5am unless work/school/medical', 'No phone use under 18—hands-free still banned'],
+          tone: 'warning'
+        }
     ],
     quickNotes: [
       { label: 'DWAI vs DUI', body: 'DWAI starts at 0.05% BAC; DUI at 0.08%. Refusal equals automatic license revocation via Express Consent.' },
       { label: 'Minor Drivers', body: 'Under-18 infractions carry community service and suspension faster—respect curfew and passenger limits.' },
+      { label: 'Seat Belt Enforcement', body: 'Adult seat belt enforcement is secondary, but it is primary for anyone under 16 and drivers are responsible for unbelted minors.' },
     ],
   },
   [View.VEHICLE]: {
@@ -117,7 +118,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     keyNumbers: [
       { label: 'Hand Placement', value: '9 & 3', detail: 'Modern airbags make 9-and-3 safest; 8-and-4 acceptable for long drives.' },
       { label: 'Following Gap', value: '3 sec', detail: 'Minimum dry pavement gap; double in bad weather.' },
-      { label: 'Signal Ahead', value: '100 ft', detail: 'Signal at least 100 ft before turns in business/residential areas.' },
+      { label: 'Signal Ahead', value: '100 ft city / 200 ft fast', detail: 'Signal at least 100 ft before turns; 200 ft when speeds exceed 40 mph (Colorado standard).' },
       { label: 'School Zone', value: '20 mph', detail: 'Slow to posted school speed limits when lights flash or children present.' },
     ],
     flashcards: [
@@ -360,7 +361,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     keyNumbers: [
       { label: 'Phone Use', value: 'Hands-Free Only', detail: 'Texting is illegal; hands-free for adults only when it is safer.' },
       { label: 'Scan Ahead', value: '10-15 sec', detail: 'Look 1 block ahead in city; quarter-mile on highways.' },
-      { label: 'Seat Belt', value: 'Primary Law', detail: 'Driver and front passenger must buckle; minors everywhere in vehicle.' },
+      { label: 'Seat Belt', value: 'Primary for Minors', detail: 'Primary enforcement for under-16 anywhere in the vehicle; adults can still be cited when unbelted.' },
       { label: 'Following Gap', value: '3-4 sec', detail: 'Add time for heavy vehicles or poor conditions.' },
     ],
     flashcards: [
