@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, Sparkles } from 'lucide-react';
 
+export type VisualTone = 'indigo' | 'emerald' | 'amber' | 'rose';
+
+export interface VisualCue {
+  title: string;
+  metricLabel: string;
+  metricValue: string;
+  subtitle: string;
+  badges?: string[];
+  tone?: VisualTone;
+  icon?: React.ReactNode;
+}
+
 export interface FlashcardItem {
   title: string;
   summary: string;
@@ -11,7 +23,8 @@ export interface FlashcardItem {
   visualLabel?: string;
   visualStat?: string;
   visualDescriptor?: string;
-  visualTone?: 'indigo' | 'emerald' | 'amber' | 'rose';
+  visualTone?: VisualTone;
+  visualCue?: VisualCue;
 }
 
 export interface KeyNumberItem {
@@ -49,23 +62,30 @@ export const FlashcardGrid: React.FC<{ items: FlashcardItem[] }> = ({ items }) =
   </div>
 );
 
+const toneBg: Record<VisualTone, string> = {
+  indigo: 'bg-gradient-to-br from-indigo-50 via-white to-slate-50 border-indigo-100 text-indigo-700',
+  emerald: 'bg-gradient-to-br from-emerald-50 via-white to-slate-50 border-emerald-100 text-emerald-700',
+  amber: 'bg-gradient-to-br from-amber-50 via-white to-slate-50 border-amber-100 text-amber-700',
+  rose: 'bg-gradient-to-br from-rose-50 via-white to-slate-50 border-rose-100 text-rose-700',
+};
+
+const toneDot: Record<VisualTone, string> = {
+  indigo: 'bg-indigo-500',
+  emerald: 'bg-emerald-500',
+  amber: 'bg-amber-500',
+  rose: 'bg-rose-500',
+};
+
+const toneIcon: Record<VisualTone, string> = {
+  indigo: 'bg-indigo-100 text-indigo-600',
+  emerald: 'bg-emerald-100 text-emerald-600',
+  amber: 'bg-amber-100 text-amber-600',
+  rose: 'bg-rose-100 text-rose-600',
+};
+
 const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
   const [isOpen, setIsOpen] = useState(false);
   const tone = card.visualTone ?? 'indigo';
-
-  const toneBg: Record<NonNullable<FlashcardItem['visualTone']>, string> = {
-    indigo: 'bg-gradient-to-br from-indigo-50 via-white to-slate-50 border-indigo-100 text-indigo-700',
-    emerald: 'bg-gradient-to-br from-emerald-50 via-white to-slate-50 border-emerald-100 text-emerald-700',
-    amber: 'bg-gradient-to-br from-amber-50 via-white to-slate-50 border-amber-100 text-amber-700',
-    rose: 'bg-gradient-to-br from-rose-50 via-white to-slate-50 border-rose-100 text-rose-700'
-  };
-
-  const toneDot: Record<NonNullable<FlashcardItem['visualTone']>, string> = {
-    indigo: 'bg-indigo-500',
-    emerald: 'bg-emerald-500',
-    amber: 'bg-amber-500',
-    rose: 'bg-rose-500'
-  };
 
   const derivedStat = card.visualStat ?? `${card.dos.length} key moves`;
   const derivedDescriptor = card.visualDescriptor ?? `${card.donts.length} risks to avoid`;
@@ -89,21 +109,13 @@ const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
           aria-label={`${card.title} visual cue ${isOpen ? 'hide' : 'show'} actions`}
           aria-controls={actionsId}
         >
-          <div className="flex items-center justify-between text-xs font-semibold">
-            <span className="uppercase tracking-[0.1em] text-[10px] opacity-80">{card.visualLabel ?? 'Visual cue'}</span>
-            <span aria-hidden="true" className="text-base">
-              {card.visual ?? <Sparkles size={16} />}
-            </span>
-          </div>
-          {typeof card.visual === 'string' && <span className="sr-only">{card.title} visual</span>}
-          <p className="text-2xl font-black mt-2 leading-none">{derivedStat}</p>
-          {derivedDescriptor && (
-            <p className="text-[12px] mt-1 leading-snug opacity-90">{derivedDescriptor}</p>
-          )}
-          <div className="mt-2 flex items-center space-x-2 text-[11px] font-semibold">
-            <span className={`inline-block w-2 h-2 rounded-full ${toneDot[tone]}`} />
-            <span className="tracking-tight">Tap to {isOpen ? 'hide' : 'reveal'} actions</span>
-          </div>
+          <VisualCueTile
+            card={card}
+            tone={tone}
+            derivedDescriptor={derivedDescriptor}
+            derivedStat={derivedStat}
+            isOpen={isOpen}
+          />
         </button>
       </div>
 
@@ -145,6 +157,68 @@ const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
         </div>
       )}
     </article>
+  );
+};
+
+const VisualCueTile: React.FC<{
+  card: FlashcardItem;
+  tone: VisualTone;
+  derivedStat: string;
+  derivedDescriptor?: string;
+  isOpen?: boolean;
+}> = ({ card, tone, derivedDescriptor, derivedStat, isOpen }) => {
+  if (card.visualCue) {
+    return (
+      <div className="space-y-2">
+        <div className="flex items-center justify-between text-[11px] font-semibold uppercase tracking-[0.12em] opacity-80">
+          <span>{card.visualCue.title}</span>
+          <span aria-hidden="true" className={`inline-flex items-center justify-center rounded-full px-2 py-1 text-[11px] font-bold ${toneIcon[tone]}`}>
+            {card.visualCue.icon ?? <Sparkles size={14} />}
+          </span>
+        </div>
+        <div className="bg-white/70 rounded-xl border border-white/60 shadow-sm p-3 space-y-1">
+          <p className="text-[11px] font-semibold text-slate-500">{card.visualCue.metricLabel}</p>
+          <p className="text-xl font-black text-slate-900 leading-tight">{card.visualCue.metricValue}</p>
+          <p className="text-[12px] text-slate-600 leading-snug">{card.visualCue.subtitle}</p>
+          {card.visualCue.badges && (
+            <div className="flex flex-wrap gap-1 pt-1">
+              {card.visualCue.badges.map((badge) => (
+                <span
+                  key={badge}
+                  className={`inline-flex items-center rounded-full px-2 py-0.5 text-[11px] font-semibold ${toneDot[tone]} text-white`}
+                >
+                  {badge}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="mt-1 flex items-center space-x-2 text-[11px] font-semibold">
+          <span className={`inline-block w-2 h-2 rounded-full ${toneDot[tone]}`} />
+          <span className="tracking-tight">Tap to {isOpen ? 'hide' : 'reveal'} actions</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className="flex items-center justify-between text-xs font-semibold">
+        <span className="uppercase tracking-[0.1em] text-[10px] opacity-80">{card.visualLabel ?? 'Visual cue'}</span>
+        <span aria-hidden="true" className="text-base">
+          {card.visual ?? <Sparkles size={16} />}
+        </span>
+      </div>
+      {typeof card.visual === 'string' && <span className="sr-only">{card.title} visual</span>}
+      <p className="text-2xl font-black mt-2 leading-none">{derivedStat}</p>
+      {derivedDescriptor && (
+        <p className="text-[12px] mt-1 leading-snug opacity-90">{derivedDescriptor}</p>
+      )}
+      <div className="mt-2 flex items-center space-x-2 text-[11px] font-semibold">
+        <span className={`inline-block w-2 h-2 rounded-full ${toneDot[tone]}`} />
+        <span className="tracking-tight">Tap to {isOpen ? 'hide' : 'reveal'} actions</span>
+      </div>
+    </>
   );
 };
 
