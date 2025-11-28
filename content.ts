@@ -454,6 +454,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     quickNotes: [
       { label: 'Traction Codes', body: 'Active Sept–May: Code 15 requires AWD/4WD with 3/16" tread OR chains/AutoSock. Code 16 (Chain Law) requires chains for ALL vehicles.' },
       { label: 'Cold Weather Technique', body: 'Plan your exit before braking. Whiteouts, black ice, and steep drop-offs mean vision-first driving: slow earlier, signal earlier, and avoid sudden steering.' },
+      { label: 'If You’re Stuck', body: 'Stay with the vehicle, clear tailpipe of snow, crack a window slightly, and use hazards while you call for help or wait for CDOT chain areas to open.' },
     ],
   },
   [View.WEATHER]: {

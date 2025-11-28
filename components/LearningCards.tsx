@@ -129,15 +129,21 @@ const toneStyles: Record<GuideTone, string> = {
 };
 
 const toneAccents: Record<GuideTone, string> = {
-  info: 'bg-indigo-500 text-indigo-500',
-  success: 'bg-emerald-500 text-emerald-600',
-  warning: 'bg-amber-500 text-amber-600'
+  info: 'bg-indigo-500 text-white',
+  success: 'bg-emerald-500 text-white',
+  warning: 'bg-amber-500 text-white'
 };
 
 const toneDots: Record<GuideTone, string> = {
   info: 'bg-indigo-500',
   success: 'bg-emerald-500',
   warning: 'bg-amber-500'
+};
+
+const toneLabels: Record<GuideTone, string> = {
+  info: 'Quick Tips',
+  success: 'Best Practice',
+  warning: 'Watch Out'
 };
 
 export const GuideCardGrid: React.FC<{ items: GuideCardItem[] }> = ({ items }) => (
@@ -150,7 +156,7 @@ export const GuideCardGrid: React.FC<{ items: GuideCardItem[] }> = ({ items }) =
         <p
           className={`inline-flex items-center px-2 py-1 rounded-full text-[11px] uppercase tracking-[0.12em] font-semibold ${toneAccents[guide.tone ?? 'info']}`}
         >
-          Quick Tips
+          {toneLabels[guide.tone ?? 'info']}
         </p>
         <h3 className="font-bold text-slate-900 leading-snug">{guide.title}</h3>
         <ul className="text-sm space-y-1">
