@@ -1,6 +1,25 @@
 import React from 'react';
 import { View, ProgressState } from '../types';
 import { PlayCircle, Award, FlaskConical, Map } from 'lucide-react';
+import { GuideCardGrid } from '../components/LearningCards';
+
+const DASHBOARD_GUIDES = [
+  {
+    title: 'Study with Cards',
+    bullets: ['Flashcards for every rule plus do/don’t lists', 'Key numbers are bolded on dark strips for quick recall', 'Checklists cap each module for real-world readiness'],
+    tone: 'info' as const
+  },
+  {
+    title: 'Practice, Then Verify',
+    bullets: ['Interactive Labs simulate right-of-way, spacing, and traction', 'Signs gallery includes filters and modal details', 'Final exam tracks your best score so far'],
+    tone: 'success' as const
+  },
+  {
+    title: 'Progress that Sticks',
+    bullets: ['Sections auto-complete as you explore', 'Course progress bar includes every module + exam', 'Exam review shows explanations for misses'],
+    tone: 'warning' as const
+  }
+];
 
 interface Props {
   progress: ProgressState;
@@ -73,6 +92,8 @@ const Dashboard: React.FC<Props> = ({ progress, setView }) => {
           </div>
         </div>
       </div>
+
+      <GuideCardGrid items={DASHBOARD_GUIDES} />
 
       {/* Stats Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

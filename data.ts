@@ -84,6 +84,42 @@ export const SIGNS: SignData[] = [
   { id: 'construction', name: 'Road Work', category: 'warning', color: 'bg-orange-500', shape: 'Diamond', description: 'Construction ahead.' },
 ];
 
+export const SIGN_GUIDES = [
+  {
+    title: 'Decode at a Glance',
+    bullets: ['Red = stop or prohibition', 'Yellow = warning/conditions ahead', 'Orange = temporary work zones', 'Blue/Green = services or direction'],
+    tone: 'info' as const
+  },
+  {
+    title: 'Right-of-Way Reminders',
+    bullets: ['Yield triangles demand slowing before entry', 'Stop signs require full stop before line/crosswalk', 'Stop behind crosswalk—never block pedestrians', 'Flashing red works the same as a STOP sign'],
+    tone: 'warning' as const
+  },
+  {
+    title: 'Night & Weather Strategy',
+    bullets: ['Reflective shapes help when colors fade', 'Slow before the condition, not at it', 'Double-check for flaggers in orange zones', 'Signal early when lines or signs are hidden by snow'],
+    tone: 'success' as const
+  }
+];
+
+export const EXAM_GUIDE = [
+  {
+    title: 'How Scoring Works',
+    bullets: ['5-question sprint here; expect 25-50 on the real exam', '80%+ keeps you on track for a pass', 'Review each explanation before retrying', 'Retake until your average stays above 85%'],
+    tone: 'info' as const
+  },
+  {
+    title: 'Test-Day Posture',
+    bullets: ['Breathe before each question—no rushing', 'Eliminate obvious wrong answers first', 'Watch for absolutes like "always" or "never"', 'Translate scenario questions into right-of-way rules'],
+    tone: 'success' as const
+  },
+  {
+    title: 'Time-Savers',
+    bullets: ['Signal distances and speed limits are favorite asks', 'Pedestrians and school buses almost always get priority', 'On mountains, uphill keeps right-of-way', 'Move over and slow down for stopped emergency vehicles'],
+    tone: 'warning' as const
+  }
+];
+
 export const LICENSE_POINTS = [
   { infraction: "DUI / DWAI", points: "8-12 pts" },
   { infraction: "Leaving Scene of Accident", points: "12 pts" },
