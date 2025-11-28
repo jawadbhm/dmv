@@ -228,7 +228,7 @@ export const moduleContent: Record<View, ModuleContent> = {
       {
         label: 'Move Over',
         value: '1 Lane',
-        detail: 'Change lanes away when safe; if not, slow 20 mph below the limit (or to 20 mph where posted under 45 mph).',
+        detail: 'Change lanes away when safe; if not, drop 20 mph below the limit when 45 mph+, or slow to 20 mph when posted under 45 mph.',
       },
     ],
     flashcards: [
@@ -368,7 +368,7 @@ export const moduleContent: Record<View, ModuleContent> = {
       }
     ],
     quickNotes: [
-      { label: 'Move Over Law', body: 'Colorado: change lanes away when safe; if not, drop 20 mph below the limit (or to 20 mph on roads under 45 mph) while passing emergency, tow, or maintenance vehicles with flashing lights.' },
+      { label: 'Move Over Law', body: 'Colorado: change lanes away when safe; if not, reduce speed by 20 mph below the limit when posted 45 mph+, or slow to **20 mph** when the limit is under 45 mph while passing emergency, tow, or maintenance vehicles with flashing lights.' },
       { label: 'Ped Priority', body: 'Treat every crosswalk like a zone of respect—Colorado expects yielding even at unmarked intersections.' },
     ],
   },
