@@ -216,7 +216,11 @@ export const moduleContent: Record<View, ModuleContent> = {
       { label: 'Residential Speed', value: '30 mph default', detail: 'Statutory in residence/business districts unless posted lower (many neighborhoods post 25 mph).' },
       { label: 'Rural Highway', value: '65-75 mph', detail: 'Follow posted; reduce for conditions.' },
       { label: '4-Way Stop', value: 'First In = First Out', detail: 'Tie goes to the right; pedestrians first.' },
-      { label: 'Move Over', value: '1 Lane', detail: 'Move over or slow for stopped emergency/utility vehicles.' },
+      {
+        label: 'Move Over',
+        value: '1 Lane',
+        detail: 'Change lanes away when safe; if not, slow 20 mph below the limit (or to 20 mph where posted under 45 mph).',
+      },
     ],
     flashcards: [
       {
@@ -276,7 +280,7 @@ export const moduleContent: Record<View, ModuleContent> = {
       {
         title: 'Exiting Cleanly',
         summary: 'Plan two exits ahead; miss it? Take the next one.',
-        dos: ['Signal 300 ft before exit on highways', 'Check mirrors and blind spot before moving right', 'Keep speed under control on off-ramps'],
+        dos: ['Signal at least 200 ft before exit at higher speeds (Colorado minimum)', 'Check mirrors and blind spot before moving right', 'Keep speed under control on off-ramps'],
         donts: ['Swerve across multiple lanes', 'Back up on ramps', 'Cross solid white gore lines'],
       },
       {
@@ -297,7 +301,7 @@ export const moduleContent: Record<View, ModuleContent> = {
       },
       {
         title: 'Exit Cleanly',
-        bullets: ['Signal 300+ ft before exit', 'Move into exit lane early—never cut the gore', 'Missed your exit? Continue and loop back safely'],
+        bullets: ['Signal about 200 ft before exit at highway speeds', 'Move into exit lane early—never cut the gore', 'Missed your exit? Continue and loop back safely'],
         tone: 'warning'
       }
     ],
@@ -453,7 +457,11 @@ export const moduleContent: Record<View, ModuleContent> = {
       }
     ],
     quickNotes: [
-      { label: 'Traction Codes', body: 'Active Sept–May: Code 15 requires AWD/4WD with 3/16" tread OR chains/AutoSock. Code 16 (Chain Law) requires chains for ALL vehicles.' },
+      {
+        label: 'Traction Codes',
+        body:
+          'Active Sept–May on I-70. Code 15: snow/M+S tires with 3/16" tread OR AWD/4WD with 3/16" tread OR chains/AutoSock. Code 16: chains/AutoSock required for all vehicles, including AWD/4WD.',
+      },
       { label: 'Cold Weather Technique', body: 'Plan your exit before braking. Whiteouts, black ice, and steep drop-offs mean vision-first driving: slow earlier, signal earlier, and avoid sudden steering.' },
       { label: 'If You’re Stuck', body: 'Stay with the vehicle, clear tailpipe of snow, crack a window slightly, and use hazards while you call for help or wait for CDOT chain areas to open.' },
     ],
