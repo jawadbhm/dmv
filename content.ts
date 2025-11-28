@@ -363,7 +363,12 @@ export const moduleContent: Record<View, ModuleContent> = {
     title: 'Driver Safety',
     subtitle: 'Prevent crashes with clear scanning, strong habits, and distraction control.',
     keyNumbers: [
-      { label: 'Phone Use', value: 'Hands-Free Only', detail: 'Texting is illegal; hands-free for adults only when it is safer.' },
+      {
+        label: 'Phone Use',
+        value: 'No Texting',
+        detail:
+          'Colorado bans texting while driving; under 18 cannot use any wireless device. Adults should keep calls hands-free only when it is safe to do so.',
+      },
       { label: 'Scan Ahead', value: '10-15 sec', detail: 'Look 1 block ahead in city; quarter-mile on highways.' },
       { label: 'Seat Belt', value: 'Primary for Minors', detail: 'Primary enforcement for under-16 anywhere in the vehicle; adults can still be cited when unbelted.' },
       { label: 'Following Gap', value: '3-4 sec', detail: 'Add time for heavy vehicles or poor conditions.' },
@@ -378,8 +383,12 @@ export const moduleContent: Record<View, ModuleContent> = {
       {
         title: 'Distraction Control',
         summary: 'Eyes, mind, and hands must stay on driving.',
-        dos: ['Set GPS/music before moving', 'Ask passengers to help with controls', 'Pull over to text/call'],
-        donts: ['Read screens at speed', 'Eat or groom while driving', 'Argue while navigating traffic'],
+        dos: [
+          'Set GPS/music before moving',
+          'Ask passengers to help with controls (especially if under 18—no device use while driving)',
+          'Pull over to text/call; keep any adult calls hands-free only when traffic is calm',
+        ],
+        donts: ['Read screens at speed', 'Eat or groom while driving', 'Use a phone at all if you are under 18 behind the wheel'],
         quickTip: 'At 55 mph, a 5-second glance = over 360 ft traveled blind.',
       },
       {
