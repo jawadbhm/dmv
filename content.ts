@@ -213,7 +213,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     title: 'Rules of the Road',
     subtitle: 'Colorado right-of-way, lane use, and speed expectations.',
     keyNumbers: [
-      { label: 'Residential Speed', value: '25-30 mph', detail: 'Unless otherwise posted.' },
+      { label: 'Residential Speed', value: '30 mph default', detail: 'Statutory in residence/business districts unless posted lower (many neighborhoods post 25 mph).' },
       { label: 'Rural Highway', value: '65-75 mph', detail: 'Follow posted; reduce for conditions.' },
       { label: '4-Way Stop', value: 'First In = First Out', detail: 'Tie goes to the right; pedestrians first.' },
       { label: 'Move Over', value: '1 Lane', detail: 'Move over or slow for stopped emergency/utility vehicles.' },
@@ -311,7 +311,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     subtitle: 'Protect people outside the car: pedestrians, bikes, transit, and trucks.',
     keyNumbers: [
       { label: 'Bike Pass', value: '3 ft', detail: 'Minimum clearance when overtaking bicyclists.' },
-      { label: 'School Bus Zone', value: 'Stop Both Ways', detail: 'Two-lane roads require full stop for flashing red lights.' },
+      { label: 'School Bus Zone', value: 'Stop Both Ways', detail: 'On undivided roads all lanes stop for flashing reds; opposite traffic may proceed only when a raised median/physical barrier divides the roadway.' },
       { label: 'No-Zone', value: 'Wide Blind Spots', detail: 'Avoid truck front, right side, and tail blind areas.' },
       { label: 'Crosswalk Speed', value: 'Slow/Stop', detail: 'Pedestrians always have priority when in crosswalk.' },
     ],
@@ -342,7 +342,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     guideCards: [
       {
         title: 'Bike & Ped Priority',
-        bullets: ['Crosswalk users always win conflicts', '3-foot minimum when passing bikes—give more at speed', 'Green bike boxes are off-limits for stopped cars']
+        bullets: ['Crosswalk users always win conflicts', '3-foot minimum when passing bikes—give more at speed', 'It’s legal to cross the center line to pass bikes when clear—never on blind hills/curves', 'Green bike boxes are off-limits for stopped cars']
       },
       {
         title: 'Big Vehicle Buffer',
@@ -351,7 +351,7 @@ export const moduleContent: Record<View, ModuleContent> = {
       }
     ],
     quickNotes: [
-      { label: 'Move Over Law', body: 'When approaching stopped emergency/maintenance vehicles, move over one lane or slow to a safe speed below posted.' },
+      { label: 'Move Over Law', body: 'Colorado: change lanes away when safe; if not, drop 20 mph below the limit (or to 20 mph on roads under 45 mph) while passing emergency, tow, or maintenance vehicles with flashing lights.' },
       { label: 'Ped Priority', body: 'Treat every crosswalk like a zone of respect—Colorado expects yielding even at unmarked intersections.' },
     ],
   },
@@ -409,7 +409,7 @@ export const moduleContent: Record<View, ModuleContent> = {
     title: 'Mountain & Winter',
     subtitle: 'Traction law basics, downhill control, and cold-weather readiness for I-70 and beyond.',
     keyNumbers: [
-      { label: 'Traction Law Fine', value: '$130 - $650', detail: 'Ticket + towing if you block traffic without required equipment.' },
+      { label: 'Traction Law Fine', value: '$130 - $650', detail: '$130 for no required gear; $650 plus towing if you block traffic during Code 15/16.' },
       { label: 'Minimum Tread', value: '3/16"', detail: 'Mandatory when Code 15 is active. Check with a quarter test.' },
       { label: 'Safe Speed Cushion', value: '10 mph', detail: 'Keep at least 10 mph below posted limit on packed snow or ice.' },
       { label: 'Following Distance', value: '6+ sec', detail: 'Double the dry pavement gap; add more for trucks or low visibility.' },
