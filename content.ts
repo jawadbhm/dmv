@@ -213,8 +213,17 @@ export const moduleContent: Record<View, ModuleContent> = {
     title: 'Rules of the Road',
     subtitle: 'Colorado right-of-way, lane use, and speed expectations.',
     keyNumbers: [
-      { label: 'Residential Speed', value: '30 mph default', detail: 'Statutory in residence/business districts unless posted lower (many neighborhoods post 25 mph).' },
-      { label: 'Rural Highway', value: '65-75 mph', detail: 'Follow posted; reduce for conditions.' },
+      {
+        label: 'Residential Speed',
+        value: '30 mph default',
+        detail: 'Statutory in residence districts. Business districts default to **25 mph** unless posted; many neighborhoods sign 25 mph.',
+      },
+      {
+        label: 'Narrow Mountain',
+        value: '20 mph default',
+        detail: 'Colorado’s statutory limit for narrow/winding mountain roads unless signs say otherwise.',
+      },
+      { label: 'Rural Highway', value: '65-75 mph', detail: 'Follow posted limits (often 75 mph rural interstates; 65 mph urban) and reduce for conditions.' },
       { label: '4-Way Stop', value: 'First In = First Out', detail: 'Tie goes to the right; pedestrians first.' },
       {
         label: 'Move Over',
@@ -258,6 +267,10 @@ export const moduleContent: Record<View, ModuleContent> = {
       }
     ],
     quickNotes: [
+      {
+        label: 'Statutory Speeds',
+        body: 'Defaults when signs are absent: **20 mph** narrow/winding mountain roads, **25 mph** business districts, **30 mph** residence districts. Posted signs always override.',
+      },
       { label: 'Work Zones', body: 'Orange signs = automatic speed and fine changes. Plan for flaggers, lane shifts, and workers on foot.' },
     ],
   },
@@ -370,7 +383,11 @@ export const moduleContent: Record<View, ModuleContent> = {
           'Colorado bans texting while driving; under 18 cannot use any wireless device. Adults should keep calls hands-free only when it is safe to do so.',
       },
       { label: 'Scan Ahead', value: '10-15 sec', detail: 'Look 1 block ahead in city; quarter-mile on highways.' },
-      { label: 'Seat Belt', value: 'Primary for Minors', detail: 'Primary enforcement for under-16 anywhere in the vehicle; adults can still be cited when unbelted.' },
+      {
+        label: 'Seat Belt',
+        value: 'Primary for Minors',
+        detail: 'Primary enforcement for under-16 anywhere in the vehicle; adults are secondary enforcement but can still be cited when stopped for another reason.',
+      },
       { label: 'Following Gap', value: '3-4 sec', detail: 'Add time for heavy vehicles or poor conditions.' },
     ],
     flashcards: [
