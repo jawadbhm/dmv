@@ -27,6 +27,7 @@ import SignsGallery from './views/SignsGallery';
 import InteractiveLabs from './views/InteractiveLabs';
 import FinalExam from './views/FinalExam';
 import GenericContent from './views/GenericContent';
+import MountainWinter from './views/MountainWinter';
 
 const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<View>(View.DASHBOARD);
@@ -94,7 +95,7 @@ const App: React.FC = () => {
       case View.LABS:
         return <InteractiveLabs onComplete={() => markComplete(View.LABS)} />;
       case View.MOUNTAIN:
-        return <GenericContent view={View.MOUNTAIN} onComplete={() => markComplete(View.MOUNTAIN)} />;
+        return <MountainWinter onComplete={() => markComplete(View.MOUNTAIN)} />;
       case View.WEATHER:
         return <GenericContent view={View.WEATHER} onComplete={() => markComplete(View.WEATHER)} />;
       case View.EMERGENCIES:
