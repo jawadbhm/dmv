@@ -67,6 +67,12 @@ const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
     rose: 'bg-rose-500'
   };
 
+  const derivedStat = card.visualStat ?? `${card.dos.length} key moves`;
+  const derivedDescriptor = card.visualDescriptor ?? `${card.donts.length} risks to avoid`;
+
+  const toggleOpen = () => setIsOpen((open) => !open);
+  const actionsId = `${card.title.replace(/\s+/g, '-').toLowerCase()}-actions`;
+
   return (
     <article className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all p-4 flex flex-col space-y-4">
       <div className="flex items-start justify-between space-x-3">
@@ -75,7 +81,14 @@ const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
           <h3 className="text-lg font-bold text-slate-900 leading-snug">{card.title}</h3>
           <p className="text-sm text-slate-600 leading-relaxed">{card.summary}</p>
         </div>
-        <div className={`w-32 shrink-0 rounded-2xl border p-3 text-left shadow-inner ${toneBg[tone]}`}>
+        <button
+          type="button"
+          onClick={toggleOpen}
+          className={`w-32 shrink-0 rounded-2xl border p-3 text-left shadow-inner transition transform hover:scale-[1.02] focus:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-indigo-200 ${toneBg[tone]}`}
+          aria-pressed={isOpen}
+          aria-label={`${card.title} visual cue ${isOpen ? 'hide' : 'show'} actions`}
+          aria-controls={actionsId}
+        >
           <div className="flex items-center justify-between text-xs font-semibold">
             <span className="uppercase tracking-[0.1em] text-[10px] opacity-80">{card.visualLabel ?? 'Visual cue'}</span>
             <span aria-hidden="true" className="text-base">
@@ -83,28 +96,29 @@ const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
             </span>
           </div>
           {typeof card.visual === 'string' && <span className="sr-only">{card.title} visual</span>}
-          <p className="text-2xl font-black mt-2 leading-none">{card.visualStat ?? 'Ready'}</p>
-          {card.visualDescriptor && (
-            <p className="text-[12px] mt-1 leading-snug opacity-90">{card.visualDescriptor}</p>
+          <p className="text-2xl font-black mt-2 leading-none">{derivedStat}</p>
+          {derivedDescriptor && (
+            <p className="text-[12px] mt-1 leading-snug opacity-90">{derivedDescriptor}</p>
           )}
           <div className="mt-2 flex items-center space-x-2 text-[11px] font-semibold">
             <span className={`inline-block w-2 h-2 rounded-full ${toneDot[tone]}`} />
-            <span className="tracking-tight">Tap to reveal actions</span>
+            <span className="tracking-tight">Tap to {isOpen ? 'hide' : 'reveal'} actions</span>
           </div>
-        </div>
+        </button>
       </div>
 
       <button
         type="button"
-        onClick={() => setIsOpen((open) => !open)}
+        onClick={toggleOpen}
         aria-expanded={isOpen}
+        aria-controls={actionsId}
         className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-sm font-semibold px-3 py-2 hover:border-indigo-200 hover:bg-indigo-50 transition-colors"
       >
         {isOpen ? 'Hide actions' : 'Show actions'}
       </button>
 
       {isOpen && (
-        <div className="space-y-2 text-sm animate-fade-in">
+        <div id={actionsId} className="space-y-2 text-sm animate-fade-in">
           <div className="flex items-start space-x-2">
             <CheckCircle className="text-emerald-500 mt-0.5" size={16} />
             <ul className="space-y-1 text-slate-700">
