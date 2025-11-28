@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CheckCircle, XCircle, Sparkles } from 'lucide-react';
 
 export interface FlashcardItem {
@@ -7,6 +7,7 @@ export interface FlashcardItem {
   dos: string[];
   donts: string[];
   quickTip?: string;
+  visual?: string;
 }
 
 export interface KeyNumberItem {
@@ -39,21 +40,42 @@ export const ContentHeader: React.FC<{ title: string; subtitle?: string }> = ({ 
 export const FlashcardGrid: React.FC<{ items: FlashcardItem[] }> = ({ items }) => (
   <div className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
     {items.map((card) => (
-      <article
-        key={card.title}
-        className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-shadow p-4 flex flex-col space-y-3"
-      >
-        <div className="flex items-start justify-between">
-          <div>
-            <p className="text-[11px] font-semibold text-indigo-500">Flashcard</p>
-            <h3 className="text-lg font-bold text-slate-900 leading-snug">{card.title}</h3>
-          </div>
-          <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-indigo-500">
-            <Sparkles size={18} />
-          </div>
+      <InteractiveFlashcard key={card.title} card={card} />
+    ))}
+  </div>
+);
+
+const InteractiveFlashcard: React.FC<{ card: FlashcardItem }> = ({ card }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <article
+      className="group bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-lg transition-all p-4 flex flex-col space-y-3"
+    >
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-[11px] font-semibold text-indigo-500">Flashcard</p>
+          <h3 className="text-lg font-bold text-slate-900 leading-snug">{card.title}</h3>
         </div>
-        <p className="text-sm text-slate-600 flex-1 leading-relaxed">{card.summary}</p>
-        <div className="space-y-2 text-sm">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-50 via-white to-slate-50 border border-slate-100 flex items-center justify-center text-indigo-500 text-xl font-bold">
+          <span aria-hidden="true">{card.visual ?? <Sparkles size={18} />}</span>
+          {typeof card.visual === 'string' && <span className="sr-only">{card.title} visual</span>}
+        </div>
+      </div>
+
+      <p className="text-sm text-slate-600 flex-1 leading-relaxed">{card.summary}</p>
+
+      <button
+        type="button"
+        onClick={() => setIsOpen((open) => !open)}
+        aria-expanded={isOpen}
+        className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-sm font-semibold px-3 py-2 hover:border-indigo-200 hover:bg-indigo-50 transition-colors"
+      >
+        {isOpen ? 'Hide actions' : 'Show actions'}
+      </button>
+
+      {isOpen && (
+        <div className="space-y-2 text-sm animate-fade-in">
           <div className="flex items-start space-x-2">
             <CheckCircle className="text-emerald-500 mt-0.5" size={16} />
             <ul className="space-y-1 text-slate-700">
@@ -71,16 +93,17 @@ export const FlashcardGrid: React.FC<{ items: FlashcardItem[] }> = ({ items }) =
             </ul>
           </div>
         </div>
-        {card.quickTip && (
-          <div className="bg-emerald-50 text-emerald-900 border border-emerald-100 rounded-xl px-3 py-2 text-xs font-semibold flex items-center space-x-2">
-            <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full"></span>
-            <span>{card.quickTip}</span>
-          </div>
-        )}
-      </article>
-    ))}
-  </div>
-);
+      )}
+
+      {card.quickTip && (
+        <div className="bg-emerald-50 text-emerald-900 border border-emerald-100 rounded-xl px-3 py-2 text-xs font-semibold flex items-center space-x-2">
+          <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full"></span>
+          <span>{card.quickTip}</span>
+        </div>
+      )}
+    </article>
+  );
+};
 
 export const KeyNumberStrip: React.FC<{ items: KeyNumberItem[] }> = ({ items }) => (
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
