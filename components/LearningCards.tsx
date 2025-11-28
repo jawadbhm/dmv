@@ -20,10 +20,12 @@ export interface ChecklistItem {
   items: string[];
 }
 
+type GuideTone = 'info' | 'success' | 'warning';
+
 export interface GuideCardItem {
   title: string;
   bullets: string[];
-  tone?: 'info' | 'success' | 'warning';
+  tone?: GuideTone;
 }
 
 export const ContentHeader: React.FC<{ title: string; subtitle?: string }> = ({ title, subtitle }) => (
@@ -120,10 +122,22 @@ export const Microcopy: React.FC<{ label: string; body: string }> = ({ label, bo
   </div>
 );
 
-const toneStyles = {
+const toneStyles: Record<GuideTone, string> = {
   info: 'bg-white border-slate-200 text-slate-700',
   success: 'bg-emerald-50 border-emerald-100 text-emerald-900',
   warning: 'bg-amber-50 border-amber-100 text-amber-900'
+};
+
+const toneAccents: Record<GuideTone, string> = {
+  info: 'bg-indigo-500 text-indigo-500',
+  success: 'bg-emerald-500 text-emerald-600',
+  warning: 'bg-amber-500 text-amber-600'
+};
+
+const toneDots: Record<GuideTone, string> = {
+  info: 'bg-indigo-500',
+  success: 'bg-emerald-500',
+  warning: 'bg-amber-500'
 };
 
 export const GuideCardGrid: React.FC<{ items: GuideCardItem[] }> = ({ items }) => (
@@ -133,12 +147,16 @@ export const GuideCardGrid: React.FC<{ items: GuideCardItem[] }> = ({ items }) =
         key={guide.title}
         className={`rounded-2xl border p-4 space-y-2 shadow-sm ${toneStyles[guide.tone ?? 'info']}`}
       >
-        <p className="text-[11px] uppercase tracking-[0.12em] font-semibold text-slate-500">Quick Tips</p>
+        <p
+          className={`inline-flex items-center px-2 py-1 rounded-full text-[11px] uppercase tracking-[0.12em] font-semibold ${toneAccents[guide.tone ?? 'info']}`}
+        >
+          Quick Tips
+        </p>
         <h3 className="font-bold text-slate-900 leading-snug">{guide.title}</h3>
         <ul className="text-sm space-y-1">
           {guide.bullets.map((item) => (
             <li key={item} className="flex items-start space-x-2">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-1" />
+              <span className={`inline-block w-1.5 h-1.5 rounded-full mt-1 ${toneDots[guide.tone ?? 'info']}`} />
               <span className="leading-snug">{item}</span>
             </li>
           ))}

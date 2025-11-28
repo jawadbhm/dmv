@@ -592,11 +592,3 @@ export const moduleContent: Record<View, ModuleContent> = {
     ],
   },
 };
-
-export const mountainFlashcards = moduleContent[View.MOUNTAIN].flashcards ?? [];
-export const keyNumbers = moduleContent[View.MOUNTAIN].keyNumbers ?? [];
-export const winterChecklist = moduleContent[View.MOUNTAIN].checklists ?? [];
-export const quickMicrocopy = (moduleContent[View.MOUNTAIN].quickNotes ?? []).reduce(
-  (acc, note) => ({ ...acc, [note.label.toLowerCase().replace(/\s+/g, '')]: note.body }),
-  {} as Record<string, string>
-);
