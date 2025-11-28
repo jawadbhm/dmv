@@ -21,6 +21,9 @@ const MountainWinter: React.FC<Props> = React.memo(({ onComplete }) => {
 });
 
 MountainWinter.displayName = 'MountainWinter';
+
+
+MountainWinter.displayName = 'MountainWinter';
   return (
     <div className="space-y-8 animate-fade-in">
       <div className="flex items-center space-x-3">
