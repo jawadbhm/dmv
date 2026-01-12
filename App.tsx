@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, ProgressState } from './types';
 import {
   LayoutDashboard,
@@ -55,20 +55,17 @@ const App: React.FC = () => {
     examHighScore: 0
   });
 
-  const markComplete = (module: string) => {
-    if (!progress.completedModules.includes(module)) {
-      setProgress(prev => ({
-        ...prev,
-        completedModules: [...prev.completedModules, module]
-      }));
-    }
-  };
+  const markComplete = useCallback((module: View) => {
+    setProgress(prev =>
+      prev.completedModules.includes(module)
+        ? prev
+        : { ...prev, completedModules: [...prev.completedModules, module] }
+    );
+  }, []);
 
-  const updateScore = (score: number) => {
-    if (score > progress.examHighScore) {
-      setProgress(prev => ({ ...prev, examHighScore: score }));
-    }
-  };
+  const updateScore = useCallback((score: number) => {
+    setProgress(prev => (score > prev.examHighScore ? { ...prev, examHighScore: score } : prev));
+  }, []);
 
   const renderView = () => {
     switch (currentView) {
